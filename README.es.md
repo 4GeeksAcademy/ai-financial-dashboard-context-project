@@ -39,7 +39,7 @@ _Dashboard de métricas financieras con frontend en React + TypeScript y backend
 ## Cómo ejecutar en local
 
 ```bash
-dd
+docker compose up --build
 ```
 
 El frontend usa por defecto el proxy de Vite para `/api`, así que no necesitas variables de entorno extra ni en desarrollo local ni en Codespaces.
