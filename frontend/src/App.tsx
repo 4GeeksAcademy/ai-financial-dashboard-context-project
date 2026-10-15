@@ -59,12 +59,21 @@ function App() {
     ? computeMonthlyData(movements)
     : [];
   const loading = !error && !movements;
+  const period = monthlyData.length
+    ? monthlyData.length === 1
+      ? monthlyData[0].month
+      : `${monthlyData[0].month} - ${monthlyData[monthlyData.length - 1].month}`
+    : loading
+      ? "Loading period..."
+      : error
+        ? "Unavailable"
+        : "No data";
 
   return (
     <main className="dark min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8">
-          <DashboardHeader period="2024 - Full Year" />
+          <DashboardHeader period={period} />
 
           {error ? (
             <div

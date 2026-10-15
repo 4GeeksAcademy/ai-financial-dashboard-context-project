@@ -33,6 +33,7 @@ const variantStyles: Record<KPICardProps['variant'], { badge: string; icon: stri
 
 export function KPICard({ label, value, helperText, icon: Icon, variant, loading }: KPICardProps) {
   const styles = variantStyles[variant]
+  const isProfit = variant === 'profit'
 
   if (loading) {
     return (
@@ -50,17 +51,29 @@ export function KPICard({ label, value, helperText, icon: Icon, variant, loading
   }
 
   return (
-    <Card className="border-border/60 hover:border-border transition-colors">
+    <Card
+      className={cn(
+        'border-border/60 transition-colors',
+        isProfit ? 'border-primary/40 bg-primary/5' : 'hover:border-border',
+      )}
+    >
       <CardContent className="p-6 flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-muted-foreground tracking-wide uppercase text-pretty">
+          <span className="text-sm font-medium text-muted-foreground text-pretty">
             {label}
           </span>
           <span className={cn('p-1.5 rounded-lg', styles.badge)}>
             <Icon size={16} className={styles.icon} />
           </span>
         </div>
-        <p className="text-3xl font-semibold tracking-tight text-foreground">{value}</p>
+        <p
+          className={cn(
+            'font-semibold tracking-tight text-foreground tabular-nums',
+            isProfit ? 'text-4xl' : 'text-3xl',
+          )}
+        >
+          {value}
+        </p>
         <p className="text-xs text-muted-foreground leading-relaxed">{helperText}</p>
       </CardContent>
     </Card>
